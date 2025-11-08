@@ -1,8 +1,7 @@
 import NavBar from "@/components/common/NavBar";
 import "./globals.css";
 import { Toaster } from "sonner";
-
-
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -17,10 +16,13 @@ export default function RootLayout({ children }) {
         <NavBar />
         {/* main content */}
         <main>
-
-        {children}
-        <Toaster  richColors position="top-right"/>
+          {children}
+          <Toaster
+            richColors
+            position="top-right"
+          />
         </main>
+        <Footer />
       </body>
     </html>
   );
