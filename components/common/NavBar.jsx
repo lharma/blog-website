@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { Image as LucideImage ,User2,LogOut} from 'lucide-react'
+import Button2 from './../HeroSection/Button'
 import Image from 'next/image'
 import Link from 'next/link'
 import Logo from '@/public/images/logo.png'
@@ -30,14 +31,14 @@ useEffect(()=>{
     }
     fethUser()
 },[])
-    const handleRoute = ()=>{
-            if(user){
-                router.push('/Dashbaord')
-            }
-            else{
-                router.push('/api/auth/SignUp')
-            }
-    }
+    // const handleRoute = ()=>{
+    //         if(user?.email){
+    //             router.push('/Dashboard/postForm')
+    //         }
+    //         else{
+    //             router.push('/api/auth/SignUp')
+    //         }
+    // }
     const handleLogout = async()=>{
         const {data,error}= await supabase.auth.signOut()
         if(!error){
@@ -47,8 +48,8 @@ useEffect(()=>{
 
   return (
     <>
-      {!hideNavbar && !hdieDashbord && (<header className='w-full min-h-4/12 flex justify-between bg-white'>
-        <div>
+      {!hideNavbar && !hdieDashbord && (<header className='w-full min-h-4/12 flex justify-between bg-white  p-5'>
+        <div className='flex items-center'>
              <Image src={Logo} height={100} width={100} alt="Logo"/>
 
         </div>
@@ -67,7 +68,7 @@ useEffect(()=>{
                hover:text-orange-600 hover:bg-transparent  
                '><Link href='/api/auth/login' ><User2  size={32}/> </Link></Button></span>
                <span>
-                <Button onClick={handleRoute} className='bg-orange-600 px-15 py-6 m-4'>Creat Post</Button>
+                <Button2  bgColor='bg-orange-600'/>
                </span>
                             </div>
                     )

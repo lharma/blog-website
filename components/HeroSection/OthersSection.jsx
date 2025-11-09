@@ -1,4 +1,6 @@
+import Button from "./Button";
 export default function OthersSection() {
+  
   return (
     <div className="w-full h-[60vh] bg-[#e67400]">
       {/* image background */}
@@ -13,9 +15,7 @@ export default function OthersSection() {
               why millions of people have published their passions here.
             </p>
 
-            <button className="w-fit bg-[#2f454f] px-6 py-4 mt-20 rounded-sm text-white text-sm font-semibold">
-              CREATE YOUR BLOG
-            </button>
+            <Button  bgColor='bg-[#2f454f] '/>
           </div>
         </div>
       </div>

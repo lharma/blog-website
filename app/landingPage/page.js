@@ -5,6 +5,7 @@ import HeroSection from "@/components/HeroSection/HeroSection";
 import MemoriesSection from "@/components/HeroSection/MemoriesSection";
 import MoneySection from "@/components/HeroSection/MoneySection";
 import OthersSection from "@/components/HeroSection/OthersSection";
+import Footer from "@/components/Footer";
 
 export default function LandingPage() {
   return (
@@ -16,6 +17,8 @@ export default function LandingPage() {
       <AudienceSection />
       <MemoriesSection />
       <OthersSection />
+          <Footer />
+
     </section>
   );
 }

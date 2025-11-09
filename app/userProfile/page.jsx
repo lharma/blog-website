@@ -1,10 +1,12 @@
 import React from 'react'
-import UploadImage from './components/UploadImage'
+// import UploadImage from './components/UploadImage'
+import User from './components/User'
 const page = () => {
   return (
-    <div>
-      <UploadImage />
-    </div>
+    <>
+      {/* <UploadImage /> */}
+      <User />
+    </>
   )
 }
 

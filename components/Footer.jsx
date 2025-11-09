@@ -1,9 +1,14 @@
+
+import {CopyrightIcon} from 'lucide-react'
 export default function Footer() {
   const helpLinks = ["Help Center", "Help Forum", "Video Tutorials"];
   const devLinks = ["Blogger API", "Developer Forum"];
   const terms = ["Terms of Service", "Privacy", "Content Policy"];
+ const year = new Date().getFullYear()
 
+ 
   return (
+
     <div className="w-full h-[44vh] flex flex-col items-center justify-center gap-12 bg-[#1d2b34] text-white text-lg">
       {/* links */}
       <div className="flex gap-40 w-[80%]">
@@ -39,7 +44,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <span className="w-[80%] h-[1px] bg-[#2f4857] "></span>
+      <span className="w-[80%] h-px bg-[#2f4857] "></span>
 
       {/* Terms Section */}
       <div className="flex justify-between w-[80%] gap-10 mx-auto">
@@ -54,11 +59,24 @@ export default function Footer() {
         </ul>
 
         <form>
-          <select className="pl-3 pr-30 py-2 rounded-sm bg-white/10">
+          <select className="pl-3 pr-30 py-2 text-black rounded-sm bg-white/10">
             <option value="">English</option>
+             <option value="">French</option>
+              <option value="">Twi</option>
+               <option value="">India</option>
+                <option value="">Arabic</option>
+                 <option value="">Chinese</option>
+                  <option value="">IGBO</option>
           </select>
         </form>
       </div>
+        <div className='w-full flex justify-center  text-sm'>
+          <span className='flex'>
+          {` ${new Date().getFullYear()} ©  by Lamar Dev`}
+          </span>
+          <hr />
+        </div>
     </div>
-  );
+    )
+  ;
 }

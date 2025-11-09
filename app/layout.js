@@ -1,7 +1,7 @@
 import NavBar from "@/components/common/NavBar";
 import "./globals.css";
 import { Toaster } from "sonner";
-import Footer from "@/components/Footer";
+// import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Create Next App",
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
             position="top-right"
           />
         </main>
-        <Footer />
+    
       </body>
     </html>
   );

@@ -31,7 +31,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="w-full h-screen flex flex-col items-center justify-end transition-colors duration-700 ease-in-out overflow-hidden"
+      className="w-full h-screen flex flex-col items-center   justify-end transition-colors duration-700 ease-in-out overflow-hidden"
       style={{ backgroundColor: currentSlide.bgColor }}>
       <HeroText />
 

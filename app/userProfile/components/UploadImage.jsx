@@ -1,33 +1,56 @@
 'use client'
+
 import React, { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase/supabaseClient'
 import { toast } from 'sonner'
-import { UploadCloud } from 'lucide-react'
+import { Router, UploadCloud } from 'lucide-react'
 
-export default function UploadAvatar({ user }) {
-  const [uploading, setUploading] = useState(false)
+export default function UploadImage() {
+  const [user, setUser] = useState(null)
   const [selectedFile, setSelectedFile] = useState(null)
   const [preview, setPreview] = useState('')
+  const [uploading, setUploading] = useState(false)
 
-  
-  // Generate preview when file is selected
+  // Fetch current user and their avatar on mount
   useEffect(() => {
-      const getUser = async()=>{
-          const {data:{user},error} = await supabase.auth.getUser()
-        }
-        if (!user) return <p>Please login to upload an avatar.</p>
-    if (!selectedFile) {
-      setPreview('')
-      return
+    const fetchUserAndAvatar = async () => {
+      const { data, error } = await supabase.auth.getUser()
+      if (error || !data.user) {
+        toast.error('Please login first.')
+        return
+      }
+      setUser(data.user)
+
+      // Fetch existing avatar from profiles table
+      const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        .select('avatar_url')
+        .eq('id', data.user.id)
+        .single()
+
+      if (profileError) {
+        console.log('Error fetching profile:', profileError)
+        return
+      }
+
+      if (profileData?.avatar_url) {
+        setPreview(profileData.avatar_url)
+      }
     }
+
+    fetchUserAndAvatar()
+  }, [])
+
+  // Generate image preview when a new file is selected
+  useEffect(() => {
+    if (!selectedFile) return
     const objectUrl = URL.createObjectURL(selectedFile)
     setPreview(objectUrl)
 
-    // Clean up
     return () => URL.revokeObjectURL(objectUrl)
-    getUser()
-  }, [selectedFile,user])
+  }, [selectedFile])
 
+  // Handle file selection
   const handleFileChange = (e) => {
     const file = e.target.files[0]
     if (!file) return
@@ -41,28 +64,28 @@ export default function UploadAvatar({ user }) {
     setSelectedFile(file)
   }
 
+  // Handle file upload
   const handleUpload = async () => {
-    if (!selectedFile) {
-      toast.error('Please select an image first.')
+    if (!selectedFile || !user) {
+      toast.error('Please select an image or login first.')
       return
     }
 
     try {
       setUploading(true)
-
       const fileExt = selectedFile.name.split('.').pop()
       const fileName = `${user.id}.${fileExt}`
       const filePath = `avatars/${fileName}`
 
-      // Upload to Supabase storage
+      // Upload file to Supabase storage
       const { error: uploadError } = await supabase.storage
-        .from('avatars')
+        .from('avartars')
         .upload(filePath, selectedFile, { upsert: true })
       if (uploadError) throw uploadError
 
       // Get public URL
       const { data, error: urlError } = supabase.storage
-        .from('avatars')
+        .from('avartars')
         .getPublicUrl(filePath)
       if (urlError) throw urlError
 
@@ -77,17 +100,23 @@ export default function UploadAvatar({ user }) {
 
       toast.success('Avatar updated successfully!')
       setSelectedFile(null)
+      setPreview(publicUrl)
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message || 'Upload failed')
       console.log(error)
     } finally {
       setUploading(false)
+
     }
+  }
+
+  if (!user) {
+    return <p>Please login to upload an avatar.</p>
   }
 
   return (
     <div className="flex flex-col items-center gap-4">
-      {/* Preview */}
+      {/* Avatar Preview */}
       <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-gray-300 dark:border-gray-700">
         {preview ? (
           <img src={preview} alt="Avatar preview" className="w-full h-full object-cover" />
@@ -98,7 +127,7 @@ export default function UploadAvatar({ user }) {
         )}
       </div>
 
-      {/* File input */}
+      {/* File Input */}
       <input
         type="file"
         accept="image/*"
@@ -107,7 +136,7 @@ export default function UploadAvatar({ user }) {
         className="file-input file-input-bordered w-full max-w-xs"
       />
 
-      {/* Upload button */}
+      {/* Upload Button */}
       <button
         onClick={handleUpload}
         disabled={uploading || !selectedFile}
