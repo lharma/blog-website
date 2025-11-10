@@ -1,19 +1,19 @@
-import Button from "./Button";
 
-export default  function HeroText() {
 
-  
-  
-  // const checkUser = ()=>{
-    
-  //  }
+export default function HeroText({
+  title,
+  desc,
+  className = "",
+  descClassName = "",
+}) {
   return (
-    <div className="w-fit flex flex-col gap-10 items-center justify-center text-center">
-      <div className="">
-        <p className="text-5xl mb-4">Publish your passions, your way</p>
-        <p className="text-2xl">Create a unique and beautiful blog easily</p>
-      </div>
-      <Button  bgColor='bg-[#ff8000]'/>
+    <div className={`${className}`}>
+      <p className="text-2xl lg:text-[44px] 2xl:text-5xl mb-4 md:mb-8">
+        {title}
+      </p>
+      <p className={`text-base lg:text-lg font-semibold ${descClassName}`}>
+        {desc}
+      </p>
     </div>
   );
 }

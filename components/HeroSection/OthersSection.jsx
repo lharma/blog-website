@@ -1,21 +1,24 @@
-import Button from "./Button";
+import HeroButton from "./HeroButton";
+import HeroText from "./HeroText";
+
 export default function OthersSection() {
   
   return (
-    <div className="w-full h-[60vh] bg-[#e67400]">
+    <div className="w-full h-[65vh] bg-[#e67400]">
       {/* image background */}
       <div className="w-full h-full bg-[url('/hero/world.png')] bg-center bg-cover bg-no-repeat">
         <div className="w-full h-full flex justify-center items-center">
           {/* Text Section */}
-          <div className=" flex flex-col justify-center items-center text-center">
-            <p className="text-5xl mb-8">Join millions of others </p>
-            <p className="text-lg font-semibold w-md">
-              Whether sharing your expertise, breaking news, or whatever’s on
+          <div className="flex flex-col justify-center items-center text-center">
+            <HeroText
+              className=""
+              title="Join millions of others"
+              desc="Whether sharing your expertise, breaking news, or whatever’s on
               your mind, you’re in good company on Blogger. Sign up to discover
-              why millions of people have published their passions here.
-            </p>
-
-            <Button  bgColor='bg-[#2f454f] '/>
+              why millions of people have published their passions here."
+              descClassName="max-w-sm md:max-w-md"
+            />
+            <HeroButton className="mt-10 md:mt-20" />
           </div>
         </div>
       </div>

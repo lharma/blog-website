@@ -33,7 +33,7 @@ export default function page() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-black">
+    <div className="flex min-h-screen items-center justify-center text-white bg-black">
       <div className="w-full max-w-md p-8 bg-[#262626] shadow-md rounded-2xl">
         <h2 className="text-2xl font-semibold text-center text-[#e5e5e5] mb-6">
           Welcome back 👋

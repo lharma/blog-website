@@ -11,17 +11,27 @@ const User = () => {
         user_location:'',
         bio:'',
         DOB:'',
-        jobTile:''
+        jobTitle:''
 })
+const handleSubmit = async (e) => {
+  e.preventDefault(); // fixed typo from e.preventDefualt()
 
- const handleSubmit = async(e)=>{
-    // e.preventDefualt()
-    // const res = fetch('api/userController',{
-    //     method:'POST',
-    //     headers:
-    // })
-    
- }
+  try {
+    // Call the server action with correct order of parameters
+    const data = await addUserProfile(
+      userInfo.full_name,
+      userInfo.bio,
+      userInfo.DOB,       // make sure this is a string in "YYYY-MM-DD" format
+      userInfo.jobTitle,  // fixed typo from jobTile → jobTitle
+      userInfo.user_location
+    );
+
+    console.log('Profile added successfully:', data);
+  } catch (error) {
+    console.error('Error adding profile:', error.message);
+  }
+};
+
  
 const handleChange =(e)=>{
     const{name,value}=e.target
@@ -106,7 +116,7 @@ const handleChange =(e)=>{
             type="text"
             name="jobTitle"
             placeholder="Software Engineer"
-            value={userInfo.jobTile}
+            value={userInfo.jobTitle}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-transparent focus:outline-none focus:ring-2 focus:ring-orange-500"
           />

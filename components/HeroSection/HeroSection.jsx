@@ -3,11 +3,33 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import HeroText from "@/components/HeroSection/HeroText";
+import HeroButton from "./HeroButton";
 
 const heroSlides = [
-  { id: 1, src: "/hero/cake.png", alt: "Hero Image 1", bgColor: "#bc382e" },
-  { id: 2, src: "/hero/family.png", alt: "Hero Image 2", bgColor: "#388d80" },
-  { id: 3, src: "/hero/tech.png", alt: "Hero Image 3", bgColor: "#4583aa" },
+  {
+    id: 1,
+    bgColor: "#bc382e",
+    leftImg: "/hero/redleft.png",
+    centerImg: "/hero/redcut.png",
+    rightImg: "/hero/redright.png",
+    alt: "Cake Slide",
+  },
+  {
+    id: 2,
+    bgColor: "#388d80",
+    leftImg: "/hero/famleft.png",
+    centerImg: "/hero/family.png",
+    rightImg: "/hero/famright.png",
+    alt: "Family Slide",
+  },
+  {
+    id: 3,
+    bgColor: "#4583aa",
+    leftImg: "/hero/technoleft1.png",
+    centerImg: "/hero/tech.png",
+    rightImg: "/hero/technoright.png",
+    alt: "Tech Slide",
+  },
 ];
 
 export default function HeroSection() {
@@ -16,14 +38,12 @@ export default function HeroSection() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnimate(true); // start slide down
+      setAnimate(true);
       setTimeout(() => {
-        // update index after animation
         setCurrentIndex((prev) => (prev + 1) % heroSlides.length);
-        setAnimate(false); // reset animation
-      }, 700); // match the CSS transition duration
-    }, 4000); // change every 4 seconds
-
+        setAnimate(false);
+      }, 700);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -31,24 +51,53 @@ export default function HeroSection() {
 
   return (
     <section
-      className="w-full h-screen flex flex-col items-center   justify-end transition-colors duration-700 ease-in-out overflow-hidden"
+      className="relative w-full h-screen flex flex-col items-center justify-end transition-colors duration-700 ease-in-out overflow-hidden"
       style={{ backgroundColor: currentSlide.bgColor }}>
-      <HeroText />
-
-      {/* image section */}
+      {/* Image row */}
       <div
-        className={`w-full max-w-4xl flex justify-center items-end h-[500px] transition-transform duration-700 ease-out transform
-          ${animate ? "translate-y-100" : "translate-y-0 "}`}>
-        <div className="w-full rounded-sm overflow-hidden transition-opacity duration-700">
+        className={`w-full grid grid-cols-2 md:grid-cols-[0.7fr_1.6fr_0.7fr] items-end h-[700px] transition-transform duration-700 ease-out ${
+          animate ? "translate-y-100" : "translate-y-0"
+        }`}>
+        {/* Left image */}
+        <div className="relative w-full h-[50%] md:h-full opacity-70 hover:opacity-100 transition duration-500">
           <Image
-            src={currentSlide.src}
-            alt={currentSlide.alt}
-            width={1000}
-            height={1000}
+            src={currentSlide.leftImg}
+            alt={`${currentSlide.alt} left`}
+            fill
+            className="object-cover"
             priority
-            className="object-contain w-full h-auto"
           />
         </div>
+
+        {/* Center image */}
+        <div className="hidden md:flex relative w-full h-full justify-center items-end">
+          <Image
+            src={currentSlide.centerImg}
+            alt={`${currentSlide.alt} center`}
+            width={1200}
+            height={600}
+            className="object-cover"
+            priority
+          />
+        </div>
+        {/* Right image */}
+        <div className="relative w-full h-[50%] md:h-full opacity-70 hover:opacity-100 transition duration-500">
+          <Image
+            src={currentSlide.rightImg}
+            alt={`${currentSlide.alt} right`}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      </div>
+
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 text-center w-full">
+        <HeroText
+          title="Publish your passions, your way"
+          desc="Create a unique and beautiful blog easily."
+        />
+        <HeroButton className="mt-6 md:mt-10" />
       </div>
     </section>
   );

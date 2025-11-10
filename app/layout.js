@@ -22,7 +22,6 @@ export default function RootLayout({ children }) {
             position="top-right"
           />
         </main>
-    
       </body>
     </html>
   );
