@@ -12,9 +12,9 @@ const TopNav = ({ onToggleSidebar }) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const router = useRouter()
 const handleLogout =async()=>{
-  const {data,error}= await supabase.auth.signOut()
+  const {error}= await supabase.auth.signOut()
   if(!error) {
-    router.push('/api/auth/login')
+    router.push('/landingPage')
   }
 } 
   return (

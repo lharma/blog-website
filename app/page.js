@@ -24,7 +24,7 @@ export default function Page() {
         if (data?.user?.email) {
           router.push('/Dashboard')
         } else {
-          router.push('/Landing')
+          router.push('/landingPage')
         }
       }catch (error){
         toast.error('error',error.message)

@@ -41,7 +41,7 @@ export default function PostDetailPage() {
   console.log('post', id)
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen text-gray-500">
+      <div className="flex justify-center items-center min-h-screen w-full text-gray-500">
         Loading post details...
       </div>
     )
