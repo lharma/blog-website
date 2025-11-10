@@ -44,7 +44,7 @@ export default function Footer() {
       </div>
 
       {/* Border */}
-      <span className="w-[80%] h-[1px] bg-[#2f4857] "></span>
+      <span className="w-[80%] h-px bg-[#2f4857] "></span>
 
       {/* Terms Section */}
       <div className="flex flex-col md:flex-row justify-between w-[80%] mx-auto">

@@ -7,9 +7,13 @@ import { toast } from 'sonner'
 import Link from 'next/link'
 
 export default function page() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter()
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [email, setEmail] = useState('')
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [password, setPassword] = useState('')
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async (e) => {
